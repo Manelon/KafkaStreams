@@ -1,0 +1,7 @@
+{"namespace": "com.manelon.model",
+ "type": "record",
+ "name": "UserId",
+ "fields": [
+     {"name": "Id", "type": "int"}
+ ]
+}
