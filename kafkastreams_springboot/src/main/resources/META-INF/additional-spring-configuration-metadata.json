@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "topics.processedUsers",
+    "type": "java.lang.String",
+    "description": "Name of the topic where the processed users are stored (output topic)"
+  },
+  {
+    "name": "topics.users",
+    "type": "java.lang.String",
+    "description": "Name of the topic where the users are stored (input topic)"
+  }
+]}

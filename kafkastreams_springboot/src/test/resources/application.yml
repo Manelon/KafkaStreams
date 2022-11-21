@@ -1,0 +1,30 @@
+topics.users: users
+topics.processedUsers: processed_users
+spring:
+    application.name: "kafkastreams_springboot"
+    kafka:
+        # Kafka Properties
+        bootstrap-servers: ${spring.embedded.kafka.brokers}
+        properties:
+            schema.registry.url: "mock://${spring.application.name}"
+        # Test Producer Properties
+        producer:
+            key-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        # Test Consumer Properties
+        consumer:
+            group-id: test_group
+            auto-offset-reset: earliest
+            key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+        # KafkaStreams Properties
+        streams.properties:
+            bootstrap.servers: ${spring.kafka.bootstrap-servers}
+            default:
+                key.serde: "io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde"
+                value.serde: "io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde"
+            schema.registry.url: "${spring.kafka.properties.schema.registry.url}"
+management.endpoint.health:
+    include: diskSpace
+    show-details: always
+

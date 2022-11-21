@@ -1,0 +1,12 @@
+{"namespace": "com.manelon.model",
+ "type": "record",
+ "name": "User",
+ "fields": [
+     {"name": "Id", "type": "int"},
+     {"name": "FirstName", "type":"string"},
+     {"name": "LastName", "type":"string"},
+     {"name": "EMail", "type":"string"},
+     {"name": "PhoneNumber", "type":["string", "null"]},
+     {"name": "Address", "type":["string", "null"]}
+ ]
+}
