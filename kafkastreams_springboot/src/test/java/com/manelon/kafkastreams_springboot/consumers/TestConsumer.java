@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.manelon.model.UserId;
 
-import io.confluent.kafka.serializers.KafkaAvroSerializer;
-
 import com.manelon.model.UserEnriched;
 
 @Component

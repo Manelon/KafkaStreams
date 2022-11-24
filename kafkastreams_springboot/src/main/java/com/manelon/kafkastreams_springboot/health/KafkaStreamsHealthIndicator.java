@@ -1,6 +1,5 @@
 package com.manelon.kafkastreams_springboot.health;
 
-import org.apache.kafka.streams.ThreadMetadata;
 import org.apache.kafka.streams.KafkaStreams.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;

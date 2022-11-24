@@ -25,7 +25,9 @@ import com.manelon.kafkastreams_springboot.config.Topics;
 import com.manelon.kafkastreams_springboot.consumers.TestConsumer;
 import com.manelon.model.User;
 import com.manelon.model.UserId;
-
+/**
+ * This is an integration test, the Springboot application is executed for this testing.
+ */
 @SpringBootTest (webEnvironment = WebEnvironment.RANDOM_PORT)
 @EmbeddedKafka(partitions = 1,
          topics = {
@@ -48,6 +50,9 @@ class KafkastreamsSpringbootApplicationTests {
   @Autowired
   private TestConsumer consumer;
 
+/**
+ *    
+ */
   private String baseUrl;
 
   
@@ -99,7 +104,7 @@ Topologies:
 
     var usersProcessed = consumer.getEnrichedUsers();
 
-    Thread.sleep(500);
+    Thread.sleep(300);
 
     assertEquals(1, usersProcessed.size());
     

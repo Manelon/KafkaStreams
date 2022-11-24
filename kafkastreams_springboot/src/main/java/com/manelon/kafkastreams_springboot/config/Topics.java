@@ -6,6 +6,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class Topics {
     private String users;
     private String processedUsers;
+    public Topics() {
+    }
+    public Topics(String users, String processedUsers) {
+        this.users = users;
+        this.processedUsers = processedUsers;
+    }
     public String getUsers() {
         return users;
     }

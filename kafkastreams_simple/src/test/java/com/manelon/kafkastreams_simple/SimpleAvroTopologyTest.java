@@ -45,6 +45,7 @@ public class SimpleAvroTopologyTest {
 	// private static Serde<Long> longSerde = new Serdes.LongSerde();
 
 	@BeforeAll
+	@SuppressWarnings("resource")
 	public static void setup() {
 
 		StreamsBuilder builder = new StreamsBuilder();
