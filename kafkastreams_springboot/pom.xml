@@ -19,6 +19,20 @@
 		<avro.version>1.11.0</avro.version> <!-- The lastest version is 1.11.1 but conlfluent is using 1.11.0 -->
 		<confluent.version>7.3.0</confluent.version>
 	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-library</artifactId>
+				<version>2.13.8</version>
+			</dependency>
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-reflect</artifactId>
+				<version>2.13.8</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.avro</groupId>

@@ -3,7 +3,6 @@ package com.manelon.kafkastreams_springboot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.apache.kafka.clients.consumer.Consumer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -16,11 +15,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
-import org.springframework.kafka.core.ConsumerFactory;
-import org.springframework.kafka.core.KafkaAdmin;
-import org.springframework.kafka.core.KafkaAdminOperations;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
@@ -31,7 +26,6 @@ import com.manelon.kafkastreams_springboot.utils.TestConsumer;
 import com.manelon.kafkastreams_springboot.utils.TestUsers;
 import com.manelon.kafkastreams_springboot.utils.TestUsersFactory;
 import com.manelon.model.User;
-import com.manelon.model.UserEnriched;
 import com.manelon.model.UserId;
 
 /**
@@ -58,12 +52,6 @@ class KafkastreamsSpringbootApplicationTests {
 
   @Autowired
   private TestConsumer consumer;
-
-  @Autowired
-  private EmbeddedKafkaBroker embeddedKafka;
-
-  @Autowired
-  private ConsumerFactory<UserId, UserEnriched> consumerFactory;
 
   private String baseUrl;
 
