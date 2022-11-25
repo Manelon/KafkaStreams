@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
 import java.util.Properties;
-import java.util.stream.Stream;
-
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -26,6 +24,9 @@ import com.manelon.model.UserId;
 import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 
+/**
+ * This is a unit test. No spring framework needed. We only test the Topology
+ */
 public class KafkaStreamsTest {
     private static final String SCHEMA_REGISTRY_SCOPE = KafkaStreamsTest.class.getName();
     private static final String MOCK_SCHEMA_REGISTRY_URL = "mock://" + SCHEMA_REGISTRY_SCOPE;
@@ -39,6 +40,7 @@ public class KafkaStreamsTest {
     private static TestOutputTopic<UserId, UserEnriched> outputTopic;
 
     @BeforeAll
+    @SuppressWarnings("resource")
     public static void init() {
         StreamsBuilder builder = new StreamsBuilder();
         var topics = new Topics(INPUT_TOPIC, OUTPUT_TOPIC);
@@ -103,4 +105,5 @@ public class KafkaStreamsTest {
         assertTrue(outputTopic.isEmpty());
 
     }
+
 }

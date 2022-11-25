@@ -1,4 +1,4 @@
-package com.manelon.kafkastreams_springboot.consumers;
+package com.manelon.kafkastreams_springboot.utils;
 
 import java.util.ArrayList;
 import java.util.List;
