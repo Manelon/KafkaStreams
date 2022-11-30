@@ -1,19 +1,23 @@
-package com.manelon.kafkastreams_simple;
+package com.manelon.kafkastreams_simple.utils.avro;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.ByteBuffer;
-
 import org.apache.avro.Conversion;
 import org.apache.avro.Conversions;
 import org.apache.avro.Schema;
+import org.apache.avro.data.TimeConversions;
 import org.apache.avro.generic.GenericRecord;
 
 
-public class AvroUtils {
+public class AvroDecimalConverter {
 
     //Inspired by https://github.com/apache/avro/blob/master/lang/java/avro/src/test/java/org/apache/avro/TestDecimalConversion.java
     final private static Conversion<BigDecimal> DECIMAL_CONVERSION = new Conversions.DecimalConversion();
+
+    protected static final TimeConversions.DateConversion DATE_CONVERSION = new TimeConversions.DateConversion();
+    protected static final TimeConversions.TimeMillisConversion TIME_CONVERSION = new TimeConversions.TimeMillisConversion();
+    protected static final TimeConversions.TimestampMillisConversion TIMESTAMP_CONVERSION = new TimeConversions.TimestampMillisConversion();
 
     /**
      * Avro stores the logical type decimal as ByteBuffer, this method converts the avro decimal to java BigDecimal
@@ -65,13 +69,11 @@ public class AvroUtils {
     }
 
     static private Schema getDecimalSchema(GenericRecord avro, String fieldName) {
-        if (!avro.hasField(fieldName))
-            throw new IllegalArgumentException("Field name " + fieldName + " in " + avro.getSchema().getFullName() + " doesn't exists");
-
-        Schema decimalSchema = avro.getSchema().getField(fieldName).schema();
+        Schema decimalSchema = AvroUtils.getFieldLogicalType(avro.getSchema(), fieldName);
 
         if (!"decimal".equals(decimalSchema.getLogicalType().getName()))
             throw new IllegalArgumentException("Field name " + fieldName + " is not decimal in " + avro.getSchema().getFullName());
         return decimalSchema;
     }
+    
 }

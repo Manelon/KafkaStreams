@@ -5,8 +5,8 @@
      {"name": "Name", "type": "string"},
      {"name": "BankBalance", "type": {"type": "bytes", "logicalType": "decimal", "precision" : 8, "scale": 2}},
      {"name": "DateOfBirth", "type": {"type": "int", "logicalType": "date"}},
-     {"name": "TimeOfBirthMiliseconds", "type": {"type": "int", "logicalType":"time-millis"}},
-     {"name": "TimeOfBirthMicroseconds", "type": {"type": "long", "logicalType":"time-micros"}},
+     {"name": "TimeOfBirthMiliseconds", "type": [{"type": "int", "logicalType":"time-millis"}, "null"]},
+     {"name": "TimeOfBirthMicroseconds", "type": [{"type": "long", "logicalType":"time-micros"}, "null"]},
      {"name": "BirthTimestamMiliseconds", "type": {"type": "long", "logicalType":"timestamp-millis"}},
      {"name": "BirthTimestampMicroseconds", "type": {"type": "long", "logicalType":"timestamp-micros"}}
  ]

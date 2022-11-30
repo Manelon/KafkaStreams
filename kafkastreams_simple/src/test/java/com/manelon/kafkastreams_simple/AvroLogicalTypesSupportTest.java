@@ -1,22 +1,12 @@
 package com.manelon.kafkastreams_simple;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.math.BigDecimal;
-import java.security.Timestamp;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import java.util.TimeZone;
-
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -26,7 +16,6 @@ import org.apache.kafka.streams.TestOutputTopic;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.TopologyTestDriver;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Named;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -34,11 +23,8 @@ import org.junit.jupiter.api.Test;
 import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 
-
-import com.manelon.model.User;
-import com.manelon.model.UserId;
+import com.manelon.kafkastreams_simple.utils.avro.AvroDecimalConverter;
 import com.manelon.model.Vulcan;
-import com.manelon.model.UserEnriched;
 
 /**
  * This test checks how well works the deserilization of some of the avro's logical types:
@@ -115,7 +101,7 @@ public class AvroLogicalTypesSupportTest {
 	}
 
 	@Test
-	void should_filter_user_when_id_is_negative () {
+	void should_serialize_and_deserialze_logical_types_with_specific_record () {
 		
 		LocalDateTime birthday = LocalDateTime.of(1967, 11, 17, 0, 59);
 		Instant birthdayTS = birthday.toInstant(ZoneId.systemDefault().getRules().getOffset(birthday));
@@ -123,7 +109,7 @@ public class AvroLogicalTypesSupportTest {
 		// for decimal conversion check: https://github.com/apache/avro/blob/master/lang/java/avro/src/test/java/org/apache/avro/TestDecimalConversion.java
 		var vulcan = new Vulcan();
 		vulcan.setName("Sarek");
-		AvroUtils.setDecimal(vulcan, "BankBalance", new BigDecimal("3.14"));
+		AvroDecimalConverter.setDecimal(vulcan, "BankBalance", new BigDecimal("3.14"));
 		vulcan.setDateOfBirth(birthday.toLocalDate());
 		vulcan.setTimeOfBirthMiliseconds(birthday.toLocalTime());
 		vulcan.setTimeOfBirthMicroseconds(birthday.toLocalTime());
@@ -131,14 +117,14 @@ public class AvroLogicalTypesSupportTest {
 		vulcan.setBirthTimestampMicroseconds(birthdayTS);
 		inputTopic.pipeInput( 1, vulcan);
 		
-		vulcan = new Vulcan("Spock", AvroUtils.decimalToBytes(new BigDecimal("17.01"), Vulcan.SCHEMA$.getField("BankBalance").schema()), birthday.toLocalDate(), birthday.toLocalTime(), birthday.toLocalTime(), birthdayTS, birthdayTS);
+		vulcan = new Vulcan("Spock", AvroDecimalConverter.decimalToBytes(new BigDecimal("17.01"), Vulcan.SCHEMA$.getField("BankBalance").schema()), birthday.toLocalDate(), birthday.toLocalTime(), birthday.toLocalTime(), birthdayTS, birthdayTS);
 
 		inputTopic.pipeInput(2,vulcan);
-		
+
 		var sarek = outputTopic.readValue();
 
 		assertEquals("Sarek", sarek.getName());
-		assertEquals("3.14", AvroUtils.getDecimal(sarek, "BankBalance").toString());
+		assertEquals("3.14", AvroDecimalConverter.getDecimal(sarek, "BankBalance").toString());
 		assertEquals(birthday.toLocalDate(), sarek.getDateOfBirth());
 		assertEquals(birthday.toLocalTime(), sarek.getTimeOfBirthMiliseconds());
 		assertEquals(birthday.toLocalTime(), sarek.getTimeOfBirthMicroseconds());
@@ -148,7 +134,7 @@ public class AvroLogicalTypesSupportTest {
 		var spock = outputTopic.readValue();
 
 		assertEquals("Spock", spock.getName());
-		assertEquals("17.01", AvroUtils.getDecimal(spock, "BankBalance").toString());
+		assertEquals("17.01", AvroDecimalConverter.getDecimal(spock, "BankBalance").toString());
 		assertEquals(birthday.toLocalDate(), spock.getDateOfBirth());
 		assertEquals(birthday.toLocalTime(), spock.getTimeOfBirthMiliseconds());
 		assertEquals(birthday.toLocalTime(), spock.getTimeOfBirthMicroseconds());
