@@ -117,7 +117,7 @@ public class AvroLogicalTypesSupportTest {
 		vulcan.setBirthTimestampMicroseconds(birthdayTS);
 		inputTopic.pipeInput( 1, vulcan);
 		
-		vulcan = new Vulcan("Spock", AvroDecimalConverter.decimalToBytes(new BigDecimal("17.01"), Vulcan.SCHEMA$.getField("BankBalance").schema()), birthday.toLocalDate(), birthday.toLocalTime(), birthday.toLocalTime(), birthdayTS, birthdayTS);
+		vulcan = new Vulcan("Spock", 100, AvroDecimalConverter.decimalToBytes(new BigDecimal("17.01"), Vulcan.SCHEMA$.getField("BankBalance").schema()), birthday.toLocalDate(), birthday.toLocalTime(), birthday.toLocalTime(), birthdayTS, birthdayTS);
 
 		inputTopic.pipeInput(2,vulcan);
 

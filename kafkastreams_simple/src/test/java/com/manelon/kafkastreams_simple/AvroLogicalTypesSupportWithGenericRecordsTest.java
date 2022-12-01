@@ -114,6 +114,7 @@ public class AvroLogicalTypesSupportWithGenericRecordsTest {
 		// for decimal conversion check: https://github.com/apache/avro/blob/master/lang/java/avro/src/test/java/org/apache/avro/TestDecimalConversion.java
 		var vulcan = new GenericRecordBuilder(Vulcan.SCHEMA$)
                                     .set("Name", "Sarek")
+									.set("Inteligence", null)
                                     .set("BankBalance", AvroDecimalConverter.decimalToBytes(BigDecimal.valueOf(3.14), Vulcan.SCHEMA$.getField("BankBalance").schema()))
                                     .set("DateOfBirth", AvroDateConverter.toAvro(birthday.toLocalDate()))
                                     .set("TimeOfBirthMiliseconds", AvroTimeConverter.LocalTimeToAvro(Vulcan.SCHEMA$, "TimeOfBirthMiliseconds", birthday.toLocalTime()))
@@ -126,6 +127,7 @@ public class AvroLogicalTypesSupportWithGenericRecordsTest {
 		
 		vulcan = new GenericRecordBuilder(Vulcan.SCHEMA$)
 									.set("Name", "Spock")
+									.set("Inteligence", 100)
                                     .set("BankBalance", AvroDecimalConverter.decimalToBytes(BigDecimal.valueOf(17.01), Vulcan.SCHEMA$.getField("BankBalance").schema()))
                                     .set("DateOfBirth", AvroDateConverter.toAvro(birthday.toLocalDate()))
                                     .set("TimeOfBirthMiliseconds", AvroTimeConverter.LocalTimeToAvro(Vulcan.SCHEMA$, "TimeOfBirthMiliseconds", birthday.toLocalTime()))

@@ -3,6 +3,7 @@
  "name": "Vulcan",
  "fields": [
      {"name": "Name", "type": "string"},
+     {"name": "Inteligence", "type": ["null", {"type": "int"}]},
      {"name": "BankBalance", "type": {"type": "bytes", "logicalType": "decimal", "precision" : 8, "scale": 2}},
      {"name": "DateOfBirth", "type": {"type": "int", "logicalType": "date"}},
      {"name": "TimeOfBirthMiliseconds", "type": [{"type": "int", "logicalType":"time-millis"}, "null"]},

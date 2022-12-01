@@ -72,6 +72,7 @@ public class AvroUtilsTest {
 
         GenericRecord vulcan = new GenericRecordBuilder(Vulcan.SCHEMA$)
                 .set("Name", "Spock")
+                .set("Inteligence", 100)
                 .set("BankBalance", AvroDecimalConverter.decimalToBytes(BigDecimal.valueOf(17.01), Vulcan.SCHEMA$.getField("BankBalance").schema()))
                 .set("DateOfBirth", AvroDateConverter.toAvro(birthday.toLocalDate()))
                 .set("TimeOfBirthMiliseconds", AvroTimeConverter.LocalTimeToAvro(Vulcan.SCHEMA$, "TimeOfBirthMiliseconds", birthday.toLocalTime()))
