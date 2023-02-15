@@ -76,6 +76,7 @@ nb-configuration.xml
 ##############################
 .vscode/
 .code-workspace
+.metals/
 
 ##############################
 ## OS X

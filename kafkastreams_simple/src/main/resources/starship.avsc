@@ -1,0 +1,8 @@
+{"namespace": "com.manelon.model.starfleet",
+ "type": "record",
+ "name": "Starship",
+ "fields": [
+     {"name": "Name", "type": "string"},
+     {"name": "Register", "type": "string"}
+ ]
+}

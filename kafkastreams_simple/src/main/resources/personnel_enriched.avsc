@@ -1,0 +1,10 @@
+{"namespace": "com.manelon.model.starfleet",
+ "type": "record",
+ "name": "PersonnelEnriched",
+ "fields": [
+     {"name": "Name", "type": "string"},
+     {"name": "StarshipId", "type": ["null", {"type": "int"}]},
+     {"name": "StarshipName", "type": ["null", {"type": "string"}]},
+     {"name": "Rank", "type": ["null", {"type": "string"}]}
+    ]
+}

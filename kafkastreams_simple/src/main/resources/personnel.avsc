@@ -1,0 +1,9 @@
+{"namespace": "com.manelon.model.starfleet",
+ "type": "record",
+ "name": "Personnel",
+ "fields": [
+     {"name": "Name", "type": "string"},
+     {"name": "Starship", "type": ["null", {"type": "int"}]},
+     {"name": "Rank", "type": ["null", {"type": "string"}]}
+    ]
+}
