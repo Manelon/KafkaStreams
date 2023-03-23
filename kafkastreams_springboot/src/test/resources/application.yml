@@ -28,3 +28,10 @@ management.endpoint.health:
     include: diskSpace
     show-details: always
 
+# logging:
+#   level:
+#     root: ERROR
+#     org.springframework: ERROR
+#     io.confluent.kafka: TRACE
+#     org.apache.kafka.clients.producer: TRACE
+#     org.apache.kafka.clients.consumer: DEBUG
